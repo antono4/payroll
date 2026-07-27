@@ -1,0 +1,685 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[indonesian]{babel}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{hyperref}
+
+% Page setup
+\geometry{
+    a4paper,
+    left=25mm,
+    right=25mm,
+    top=30mm,
+    bottom=25mm
+}
+
+% Colors
+\definecolor{primary}{RGB}{37, 99, 235}
+\definecolor{success}{RGB}{34, 197, 94}
+\definecolor{warning}{RGB}{251, 191, 36}
+\definecolor{danger}{RGB}{239, 68, 68}
+\definecolor{gray}{RGB}{107, 114, 128}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\rfoot{Halaman \thepage}
+\lfoot{Aplikasi Payroll v1.0}
+\cfoot{}
+
+% Title setup
+\pretitle{
+    \begin{center}
+    \LARGE\布雷
+    \end{center}
+}
+\posttitle{\par\end{center}}
+
+% Section styling
+\titleformat{\section}
+    {\Large\bfseries\color{primary}}{}{0em}{}
+
+\titleformat{\subsection}
+    {\large\bfseries\color{primary}}{}{0em}{}
+
+\begin{document}
+
+% Cover Page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    % Logo placeholder
+    \begin{center}
+        \布雷
+        \textbf{\LARGE SISTEM PAYROLL}
+    \end{center}
+    
+    \vspace{1cm}
+    
+    {\Huge\布雷\textbf{Modul Instalasi}}
+    \vspace{0.5cm}
+    
+    {\Large Windows 11}
+    \vspace{2cm}
+    
+    \begin{center}
+        \framebox{
+            \begin{minipage}{0.8\textwidth}
+                \centering
+                \textbf{Panduan Lengkap Instalasi}\\
+                \vspace{0.3cm}
+                Aplikasi Payroll Indonesia\\
+                dengan PPh 21, BPJS, dan Slip Gaji
+            \end{minipage}
+        }
+    \end{center}
+    
+    \vspace{3cm}
+    
+    {\Large\布雷\textbf{Versi 1.0}}
+    \vspace{1cm}
+    
+    {\large GitHub: \texttt{antono4/payroll}}
+    
+    \vspace{2cm}
+    
+    \copyright\ 2024 - Aplikasi Payroll Indonesia
+    
+\end{titlepage}
+
+% Table of Contents
+\newpage
+\tableofcontents
+\newpage
+
+% ============================================
+% SECTION 1: PENDAHULUAN
+% ============================================
+\section{PENDAHULUAN}
+
+\subsection{Tentang Aplikasi}
+Aplikasi Payroll adalah sistem penggajian lengkap yang dirancang khusus untuk perusahaan Indonesia. Aplikasi ini mencakup:
+
+\begin{itemize}
+    \item \textbf{Manajemen Karyawan} - Data lengkap karyawan dengan NIK, NPWP, BPJS
+    \item \textbf{Absensi \& Kehadiran} - Tracking jam kerja dan keterlambatan
+    \item \textbf{Manajemen Cuti} - Pengajuan dan persetujuan cuti
+    \item \textbf{Proses Payroll} - Kalkulasi otomatis PPh 21 dan BPJS
+    \item \textbf{Slip Gaji PDF} - Generate slip gaji profesional
+    \item \textbf{Laporan} - Ringkasan payroll dan export data
+\end{itemize}
+
+\subsection{Fitur Utama}
+\begin{center}
+\begin{tabular}{|l|l|}
+    \hline
+    \textbf{Fitur} & \textbf{Deskripsi} \\
+    \hline
+    PPh 21 Calculator & Kalkulasi pajak progresif 2024 \\
+    \hline
+    BPJS Kesehatan & 1\% employee, 4\% employer \\
+    \hline
+    BPJS TK (JHT, JP) & 2\% employee, 3.7\% employer \\
+    \hline
+    Overtime & Sesuai UU Ketenagakerjaan \\
+    \hline
+    Slip Gaji PDF & Preview dan print langsung \\
+    \hline
+    Role-Based Access & Super Admin, HR, Employee \\
+    \hline
+\end{tabular}
+\end{center}
+
+% ============================================
+% SECTION 2: PERSIAPAN SISTEM
+% ============================================
+\newpage
+\section{PERSIAPAN SISTEM}
+
+\subsection{Kebutuhan Sistem}
+Sebelum instalasi, pastikan komputer Anda memenuhi requirements berikut:
+
+\begin{center}
+\begin{tabular}{|l|l|}
+    \hline
+    \textbf{Komponen} & \textbf{Minimum} \\
+    \hline
+    Sistem Operasi & Windows 11 \\
+    \hline
+    Processor & Intel Core i3 / AMD Ryzen 3 \\
+    \hline
+    RAM & 4 GB (disarankan 8 GB) \\
+    \hline
+    Storage & 10 GB free space \\
+    \hline
+    Koneksi Internet & Required untuk download \\
+    \hline
+\end{tabular}
+\end{center}
+
+\subsection{Software yang Dibutuhkan}
+
+\subsubsection{1. Node.js}
+Node.js adalah runtime JavaScript yang dibutuhkan untuk menjalankan aplikasi.
+
+\textbf{Download:} \url{https://nodejs.org/}
+
+\begin{enumerate}
+    \item Buka browser dan kunjungi \url{https://nodejs.org/}
+    \item Klik tombol \textbf{Download Node.js LTS}
+    \item Pilih versi \textbf{.msi installer} (64-bit)
+    \item Simpan file installer
+\end{enumerate}
+
+\textbf{Instalasi Node.js:}
+\begin{enumerate}
+    \item Double-click file \texttt{node-v18-xx.xx-x64.msi}
+    \item Klik \textbf{Next}
+    \item \textbf{Penting:} Centang \textit{``Automatically install necessary tools''}
+    \item Pilih lokasi instalasi (default: \texttt{C:\textbackslash Program Files\textbackslash nodejs})
+    \item Klik \textbf{Install}
+    \item Tunggu sampai selesai
+    \item Klik \textbf{Finish}
+\end{enumerate}
+
+\textbf{Verifikasi Instalasi:}
+\begin{lstlisting}[language=bash]
+# Buka Command Prompt atau PowerShell
+node --version
+# Output seharusnya: v18.x.x
+
+npm --version
+# Output seharusnya: 9.x.x
+\end{lstlisting}
+
+\subsubsection{2. PostgreSQL}
+PostgreSQL adalah database untuk menyimpan data aplikasi.
+
+\textbf{Download:} \url{https://www.postgresql.org/download/windows/}
+
+\textbf{Instalasi PostgreSQL:}
+\begin{enumerate}
+    \item Download PostgreSQL installer dari:
+    \url{https://www.enterprisedb.com/downloads/postgresql}
+    \item Double-click installer
+    \item Klik \textbf{Next}
+    \item \textbf{Penting:} Saat diminta password, \textbf{INGAT dan CATAT} password ini!
+    \item Port default: \texttt{5432} (jangan diubah)
+    \item Klik \textbf{Next} hingga selesai
+    \item Uncheck ``Launch Stack Builder''
+    \item Klik \textbf{Finish}
+\end{enumerate}
+
+\textbf{Catatan Penting:}
+\begin{center}
+\framebox{
+    \begin{minipage}{0.85\textwidth}
+        \textbf{\danger{} PERINGATAN}\\
+        \vspace{0.2cm}
+        Ingat password PostgreSQL yang dibuat saat instalasi!\\
+        Password ini akan digunakan untuk connecting ke database.\\
+        Contoh: \texttt{postgres123}
+    \end{minipage}
+}
+\end{center}
+
+% ============================================
+% SECTION 3: PEMBUATAN DATABASE
+% ============================================
+\newpage
+\section{PEMBUATAN DATABASE}
+
+\subsection{Buka pgAdmin}
+pgAdmin adalah tool untuk manage PostgreSQL database.
+
+\begin{enumerate}
+    \item Tekan \textbf{Windows + S}, ketik \texttt{pgAdmin}
+    \item Buka \textbf{pgAdmin 4}
+    \item Klik pada \textbf{PostgreSQL} di panel kiri
+    \item Masukkan password yang dibuat saat instalasi
+    \item Klik \textbf{OK}
+\end{enumerate}
+
+\subsection{Buat Database Baru}
+
+\begin{enumerate}
+    \item Klik kanan pada \textbf{Databases} $\rightarrow$ \textbf{Create} $\rightarrow$ \textbf{Database...}
+    \item Isi field berikut:
+    \begin{center}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Field} & \textbf{Value} \\
+        \hline
+        Database & \texttt{payroll\_db} \\
+        \hline
+        Owner & \texttt{postgres} \\
+        \hline
+        Comment & \texttt{Database Aplikasi Payroll} \\
+        \hline
+    \end{tabular}
+    \end{center}
+    \item Klik \textbf{Save}
+\end{enumerate}
+
+\begin{center}
+\framebox{
+    \begin{minipage}{0.85\textwidth}
+        \textbf{\success{} SUCCESS}\\
+        \vspace{0.2cm}
+        Database \texttt{payroll\_db} berhasil dibuat!\\
+        Nanti akan digunakan untuk \texttt{DATABASE\_URL} di file .env
+    \end{minipage}
+}
+\end{center}
+
+% ============================================
+% SECTION 4: CLONE PROJECT
+% ============================================
+\newpage
+\section{DOWNLOAD PROJECT}
+
+\subsection{Download dari GitHub}
+
+\begin{enumerate}
+    \item Buka \textbf{Command Prompt} atau \textbf{PowerShell}
+    \item Pindah ke folder tempat menyimpan project:
+\begin{lstlisting}[language=bash]
+cd Documents
+\end{lstlisting}
+    \item Clone repository:
+\begin{lstlisting}[language=bash]
+git clone https://github.com/antono4/payroll.git
+\end{lstlisting}
+    \item Masuk ke folder project:
+\begin{lstlisting}[language=bash]
+cd payroll
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{Struktur Folder}
+Setelah clone, struktur folder akan seperti ini:
+
+\begin{verbatim}
+Documents/
+└── payroll/
+    ├── prisma/
+    ├── src/
+    ├── node_modules/
+    ├── package.json
+    ├── .env.example
+    └── README.md
+\end{verbatim}
+
+% ============================================
+% SECTION 5: SETUP ENVIRONMENT
+% ============================================
+\newpage
+\section{SETUP ENVIRONMENT VARIABLES}
+
+\subsection{Buat File .env}
+
+File \texttt{.env} menyimpan konfigurasi aplikasi.
+
+\begin{enumerate}
+    \item Di folder \texttt{payroll}, buat file baru bernama \texttt{.env}
+    \item \textbf{Penting:} Pastikan extension-nya \textbf{bukan} \texttt{.env.txt}
+\end{enumerate}
+
+\subsection{Isi File .env}
+
+Buka file \texttt{.env} dengan Notepad atau VS Code, lalu isi dengan:
+
+\begin{lstlisting}[language=bash]
+# ===========================================
+# DATABASE CONFIGURATION
+# ===========================================
+# Ganti 'password_kamu' dengan password PostgreSQL
+DATABASE_URL="postgresql://postgres:PASSWORD_KAMU@localhost:5432/payroll_db"
+
+# ===========================================
+# NEXTAUTH CONFIGURATION
+# ===========================================
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="inirahasia123456789012345678901234567890"
+\end{lstlisting}
+
+\begin{center}
+\framebox{
+    \begin{minipage}{0.85\textwidth}
+        \textbf{\warning{} IMPORTANT}\\
+        \vspace{0.2cm}
+        Ganti \texttt{PASSWORD\_KAMU} dengan password PostgreSQL Anda!\\
+        Contoh: \texttt{DATABASE\_URL="postgresql://postgres:postgres123@localhost:5432/payroll\_db"}
+    \end{minipage}
+}
+\end{center}
+
+% ============================================
+% SECTION 6: INSTALASI DEPENDENCIES
+% ============================================
+\newpage
+\section{INSTALASI DEPENDENCIES}
+
+\subsection{Install NPM Packages}
+
+Buka Command Prompt di folder \texttt{payroll}, jalankan:
+
+\begin{lstlisting}[language=bash]
+npm install
+\end{lstlisting}
+
+Proses ini akan mendownload semua package yang dibutuhkan. Tunggu hingga selesai (bisa beberapa menit tergantung koneksi internet).
+
+\subsection{Verifikasi node\_modules}
+Setelah instalasi selesai, cek folder \texttt{node\_modules} harus sudah ada dengan banyak subfolder di dalamnya.
+
+\begin{center}
+\framebox{
+    \begin{minipage}{0.85\textwidth}
+        \textbf{\success{} SUCCESS}\\
+        \vspace{0.2cm}
+        Jika \texttt{npm install} berhasil tanpa error,\\
+        berarti semua dependencies sudah terinstall dengan benar!
+    \end{minipage}
+}
+\end{center}
+
+% ============================================
+% SECTION 7: SETUP DATABASE
+% ============================================
+\newpage
+\section{SETUP DATABASE}
+
+\subsection{Generate Prisma Client}
+
+Prisma Client adalah tool untuk berinteraksi dengan database.
+
+\begin{lstlisting}[language=bash]
+npm run db:generate
+\end{lstlisting}
+
+\subsection{Push Schema ke Database}
+
+\begin{lstlisting}[language=bash]
+npm run db:push
+\end{lstlisting}
+
+Perintah ini akan membuat semua tabel di database PostgreSQL.
+
+\subsection{Seed Data Awal}
+
+\begin{lstlisting}[language=bash]
+npm run db:seed
+\end{lstlisting}
+
+Ini akan membuat:
+\begin{itemize}
+    \item Roles (Super Admin, HR Admin, Employee)
+    \item Sample employees
+    \item Salary components default
+    \item Leave types
+\end{itemize}
+
+\begin{center}
+\framebox{
+    \begin{minipage}{0.85\textwidth}
+        \textbf{\success{} DATABASE READY}\\
+        \vspace{0.2cm}
+        Database sudah siap dengan tabel dan data awal!\\
+        Sekarang bisa menjalankan aplikasi.
+    \end{minipage}
+}
+\end{center}
+
+% ============================================
+% SECTION 8: JALANKAN APLIKASI
+% ============================================
+\newpage
+\section{JALANKAN APLIKASI}
+
+\subsection{Start Development Server}
+
+\begin{lstlisting}[language=bash]
+npm run dev
+\end{lstlisting}
+
+Tunggu beberapa detik sampai muncul:
+
+\begin{verbatim}
+  - Local:        http://localhost:3000
+  - ready started server on localhost:3000
+\end{verbatim}
+
+\subsection{Buka di Browser}
+
+\begin{enumerate}
+    \item Buka browser (Chrome, Firefox, Edge)
+    \item Ketik: \texttt{http://localhost:3000}
+    \item Halaman landing akan muncul
+\end{enumerate}
+
+\subsection{Halaman Login}
+
+\begin{enumerate}
+    \item Klik tombol \textbf{Login} di pojok kanan atas
+    \item Atau langsung ke: \texttt{http://localhost:3000/login}
+\end{enumerate}
+
+% ============================================
+% SECTION 9: LOGIN CREDENTIALS
+% ============================================
+\newpage
+\section{LOGIN CREDENTIALS}
+
+\subsection{Akun Demo}
+
+Gunakan salah satu akun berikut untuk login:
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+    \hline
+    \textbf{Role} & \textbf{Email} & \textbf{Password} & \textbf{Akses} \\
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Super Admin} & admin@contoh.co.id & admin123 & Semua fitur \\
+    \textbf{HR Admin} & hr@contoh.co.id & hr123 & Payroll, Karyawan \\
+    \rowcolor{gray!20}
+    \textbf{Employee} & john.doe@contoh.co.id & emp123 & Slip Gaji, Cuti \\
+    \hline
+\end{tabular}
+\end{center}
+
+\subsection{Fitur per Role}
+
+\subsubsection{Super Admin}
+\begin{itemize}
+    \item Semua fitur HR Admin
+    \item Pengaturan sistem
+    \item Manajemen user
+\end{itemize}
+
+\subsubsection{HR Admin}
+\begin{itemize}
+    \item Manajemen karyawan
+    \item Proses payroll
+    \item Approval cuti
+    \item Lihat slip gaji
+    \item Laporan
+\end{itemize}
+
+\subsubsection{Employee}
+\begin{itemize}
+    \item Lihat slip gaji sendiri
+    \item Ajukan cuti
+    \item Cek saldo cuti
+    \item Update profil
+\end{itemize}
+
+% ============================================
+% SECTION 10: TROUBLESHOOTING
+% ============================================
+\newpage
+\section{TROUBLESHOOTING}
+
+\subsection{Error: npm not recognized}
+
+\textbf{Penyebab:} Node.js belum terinstall dengan PATH yang benar.
+
+\textbf{Solusi:}
+\begin{enumerate}
+    \item Restart komputer
+    \item Jika masih error, reinstall Node.js
+    \item Pastikan centang ``Add to PATH''
+\end{enumerate}
+
+\subsection{Error: Database connection failed}
+
+\textbf{Penyebab:} Password PostgreSQL salah atau PostgreSQL service tidak jalan.
+
+\textbf{Solusi:}
+\begin{enumerate}
+    \item Pastikan PostgreSQL service sedang berjalan:
+    \begin{itemize}
+        \item Tekan \texttt{Win + R}, ketik \texttt{services.msc}
+        \item Cari \texttt{postgresql-x64-xx}
+        \item Pastikan Status: \texttt{Running}
+    \end{itemize}
+    \item Cek password di file \texttt{.env}
+\end{enumerate}
+
+\subsection{Error: Port 3000 already in use}
+
+\textbf{Penyebab:} Ada aplikasi lain yang menggunakan port 3000.
+
+\textbf{Solusi:}
+\begin{enumerate}
+    \item换 port berbeda:
+\begin{lstlisting}[language=bash]
+set PORT=3001 && npm run dev
+\end{lstlisting}
+    \item Buka \texttt{http://localhost:3001}
+\end{enumerate}
+
+\subsection{Error: Prisma generate failed}
+
+\textbf{Solusi:}
+\begin{enumerate}
+    \item Pastikan DATABASE\_URL benar di \texttt{.env}
+    \item Jalankan ulang:
+\begin{lstlisting}[language=bash]
+npm run db:generate
+npm run db:push
+\end{lstlisting}
+\end{enumerate}
+
+% ============================================
+% SECTION 11: QUICK REFERENCE
+% ============================================
+\newpage
+\section{QUICK REFERENCE}
+
+\subsection{URL Routes}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+    \hline
+    \textbf{Halaman} & \textbf{URL} \\
+    \hline
+    Landing Page & \texttt{http://localhost:3000} \\
+    \hline
+    Login & \texttt{http://localhost:3000/login} \\
+    \hline
+    Dashboard & \texttt{http://localhost:3000/dashboard} \\
+    \hline
+    Karyawan & \texttt{http://localhost:3000/employees} \\
+    \hline
+    Absensi & \texttt{http://localhost:3000/attendance} \\
+    \hline
+    Cuti & \texttt{http://localhost:3000/leave} \\
+    \hline
+    Payroll & \texttt{http://localhost:3000/payroll} \\
+    \hline
+    Slip Gaji & \texttt{http://localhost:3000/payslips} \\
+    \hline
+    Laporan & \texttt{http://localhost:3000/reports} \\
+    \hline
+\end{tabular}
+\end{center}
+
+\subsection{Useful Commands}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+    \hline
+    \textbf{Command} & \textbf{Fungsi} \\
+    \hline
+    \texttt{npm run dev} & Jalankan dev server \\
+    \hline
+    \texttt{npm run build} & Build production \\
+    \hline
+    \texttt{npm run db:push} & Update database schema \\
+    \hline
+    \texttt{npm run db:seed} & Reset \& seed data \\
+    \hline
+    \texttt{npm run db:studio} & Buka Prisma Studio \\
+    \hline
+\end{tabular}
+\end{center}
+
+% ============================================
+% SECTION 12: SUPPORT
+% ============================================
+\newpage
+\section{SUPPORT}
+
+\subsection{Mendapatkan Bantuan}
+
+\begin{itemize}
+    \item \textbf{GitHub Issues:} \url{https://github.com/antono4/payroll/issues}
+    \item \textbf{Documentation:} Lihat README.md di repository
+\end{itemize}
+
+\subsection{Reset Database}
+
+Jika ingin reset semua data:
+
+\begin{lstlisting}[language=bash]
+npm run db:push -- --force-reset
+npm run db:seed
+\end{lstlisting}
+
+\subsection{Update Kode}
+
+Untuk update ke versi terbaru:
+
+\begin{lstlisting}[language=bash]
+git pull origin main
+npm install
+npm run db:push
+npm run db:seed
+\end{lstlisting}
+
+% ============================================
+% FOOTER
+% ============================================
+\newpage
+\vspace*{\fill}
+\begin{center}
+    \textbf{\LARGE Terima Kasih!}\\
+    \vspace{1cm}
+    \Large Aplikasi Payroll Indonesia v1.0\\
+    \vspace{0.5cm}
+    \texttt{GitHub: https://github.com/antono4/payroll}\\
+    \vspace{1cm}
+    \copyright\ 2024 - Dibuat dengan Next.js untuk Indonesia
+\end{center}
+\vspace*{\fill}
+
+\end{document}
